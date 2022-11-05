@@ -21,7 +21,7 @@ def cls():              #clear cross os
 
 cls()
 print("________________________________________________________________\n")
-print("Files are uploaded thru discord [https://discord.com/tos]")
+print("Files are uploaded through discord [https://discord.com/tos]")
 print("DISCORD DOES NOT ENCRYPT MESSAGES ALL UPLOADED FILES ARE PUBLIC")
 print("________________________________________________________________\n")
 path_img = input("[D&D] File path: ")

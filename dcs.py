@@ -1,6 +1,6 @@
 import requests, sys, json, os, time, pyperclip
 
-webhook = "https://canary.discord.com/api/webhooks/1019691325471330496/eTF-zeMiVy9zC0Jyq6h4VNATWwqT1bUDPuMI8TwIksUX9ZZFdRX5ibpXPcInLUsEKabM" #WebHook URL
+webhook = "https://discordapp.com/api/webhooks/1038464988626550896/aHmYQHLOMzofbVaHLA30iBVqsILCNMyDId-E5SFJQmMEEQwCrdoHOJiaNGRIDfSsqwf9" #WebHook URL
 
 if(len(webhook)<5): #if webhook url exists
     print("[Line: 3] WebHook URL missing!")
@@ -19,12 +19,15 @@ def cls():              #clear cross os
     else:
         os.system("clear")
 
-cls()
-print("________________________________________________________________\n")
-print("Files are uploaded through discord [https://discord.com/tos]")
-print("DISCORD DOES NOT ENCRYPT MESSAGES ALL UPLOADED FILES ARE PUBLIC")
-print("________________________________________________________________\n")
-path_img = input("[D&D] File path: ")
+#cls()
+if(len(sys.argv) > 1):
+    path_img=sys.argv[1]
+else:
+    print("________________________________________________________________\n")
+    print("Files are uploaded through discord [https://discord.com/tos]")
+    print("DISCORD DOES NOT ENCRYPT MESSAGES ALL UPLOADED FILES ARE PUBLIC")
+    print("________________________________________________________________\n")
+    path_img = input("[D&D] File path: ")
 
 if(os.path.exists(path_img) and round(os.path.getsize(path_img) / (1024 * 1024), 3) < 100): #if file exists and if file is under 100MB (discord file size upload limit)
     url = webhook+'?wait=true'  #add ?wait=true at the end of webhook url to get res form request
@@ -33,12 +36,12 @@ if(os.path.exists(path_img) and round(os.path.getsize(path_img) / (1024 * 1024),
         files= {'image': (name_img,img,'multipart/form-data',{'Expires': '0'}) }
         with requests.Session() as s:
             r = s.post(url,files=files, headers={"authorization": ""})      #Upload file to discord
-            cls()
+            #cls()
             if("200" in str(r)):                                            #If file was uploaded successfully
                 url_of_file = json.loads(r.text)['attachments'][0]['url']   #Get Url from request res
                 c("Successfully uploaded!\n", .05)
                 print(url_of_file)
-                pyperclip.copy(url_of_file)                                 #Copy URL to clipboard
+                #pyperclip.copy(url_of_file) win olny                                 #Copy URL to clipboard
             else:
                 print("Error")
                 print("Request res: ")
